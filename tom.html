@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Containers for our components -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- Actual tracking library -->
+    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <!-- Allow for animation-->
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div
+      class="position-absolute font-2em bottom-10px w-100 text-center on-top font-monospace"
+    >
+      <a target="_blank" href="https://www.knog.com.au/">
+        <button type="button" class="btn btn-primary btn-lg">
+          View Product Details
+        </button></a
+      >
+    </div>
+
+    <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
+    <a-scene
+      embedded
+      renderer="precision: medium; colorManagement: true; logarithmicDepthBuffer: true;"
+      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; trackingMethod: best; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;"
+    >
+      <a-marker
+        preset="custom"
+        type="pattern"
+        url="/markers/pattern-knog-standalone-73.patt"
+        id="knog-marker"
+      >
+        <a-entity
+          gltf-model="src: url(models/Trail_Blank_Lite_v3_005.gltf);"
+          loop="infinite"
+          scale="1 1 1"
+          rotation="-90 0 0"
+          animation-mixer
+        >
+        </a-entity>
+      </a-marker>
+
+    
+      <a-entity camera></a-entity>
+    </a-scene>
+    
+  </body>
+</html>
