@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body style="margin : 0px; overflow: hidden; font-family: Monospace;">
+    <div
+      class="position-absolute font-2em bottom-10px right w-100 text-center on-top font-monospace"
+    >
+      <a href="https://www.knog.com.au/bike-lights/pwr-trail.html" class="">
+        <button type="button" class="btn btn-primary btn-lg">
+          View Product Details
+        </button></a
+      >
+    </div>
+    <a-scene
+      artoolkit
+      embedded
+      arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+      renderer="precision: medium; colorManagement: true; logarithmicDepthBuffer: true; debugUIEnabled: false;"
+    >
+      <a-assets>
+        <a-asset-item id="model" src="models/2019_PWR-Trail-AR-Lite-F_01v4.gltf"></a-asset-item>
+      </a-assets>
+      <a-marker type="barcode" value="2">
+        <a-entity
+          id="model"
+          gltf-model="#model"
+          loop="infinite"
+          scale="1 1 1"
+          position="0 2 0"
+          animation="property: rotation; from: 90 0 180; to: 90 359 180; dur: 12000; loop:true; easing:linear;"
+          animation-mixer
+        >
+        </a-entity>
+      </a-marker>
+
+      <a-marker type="barcode" value="6">
+        <a-entity
+          id="model"
+          gltf-model="#model"
+          loop="infinite"
+          scale=".5 .5 .5"
+          position="0 2 0"
+          animation="property: rotation; from: 270 0 0; to: 270 359 0; dur: 12000; loop:true; easing:linear;"
+          animation-mixer
+        >
+        </a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+      var l = document.querySelector("#model");
+      var $status = $("#model-status");
+      var $modelLoader = $("#model-loader");
+      l.addEventListener("model-loaded", l => {
+        $status.html("Load done");
+        $status.removeClass("text-red");
+        $modelLoader.addClass("d-none");
+        $("#loadingText").addClass("d-none");
+        // $("#loadingText").addClass("size-none");
+        $status.addClass("text-green");
+      });
+    </script>
+  </body>
+</html>
